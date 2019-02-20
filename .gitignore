@@ -18,13 +18,12 @@
 *.so
 *.so.dbg
 *.mod.c
-*.i
 *.lst
 *.symtypes
 *.order
-modules.builtin
 *.elf
 *.bin
+*.tar
 *.gz
 *.bz2
 *.lzma
@@ -33,6 +32,12 @@ modules.builtin
 *.lzo
 *.patch
 *.gcno
+*.ll
+modules.builtin
+Module.symvers
+*.dwo
+*.su
+*.c.[012]*.*
 
 #
 # Top-level generic files
@@ -41,10 +46,17 @@ modules.builtin
 /TAGS
 /linux
 /vmlinux
+/vmlinux.32
+/vmlinux-gdb.py
 /vmlinuz
 /System.map
 /Module.markers
-/Module.symvers
+
+# Secure keys
+*.pem
+*.pk8
+*.key
+*.pk12
 
 #
 # Debian directory (make deb-pkg)
@@ -52,16 +64,21 @@ modules.builtin
 /debian/
 
 #
-# git files that we don't want to ignore even it they are dot-files
+# tar directory (make tar*-pkg)
+#
+/tar-install/
+
+#
+# git files that we don't want to ignore even if they are dot-files
 #
 !.gitignore
 !.mailmap
+!.cocciconfig
 
 #
 # Generated include files
 #
 include/config
-include/linux/version.h
 include/generated
 arch/*/include/generated
 
@@ -82,20 +99,36 @@ GRTAGS
 GSYMS
 GTAGS
 
+# id-utils files
+ID
+
 *.orig
 *~
 \#*#
 
-# generated caf
-arch/arm/mach-msm/smd_rpc_sym.c
+#
+# Leavings from module signing
+#
+extra_certificates
+signing_key.pem
+signing_key.priv
+signing_key.x509
+x509.genkey
 
-# compressed boot files
-arch/arm/boot/compressed/ashldi3.S
-arch/arm/boot/compressed/lib1funcs.S
-arch/arm/boot/compressed/piggy.gzip
-arch/arm/boot/compressed/piggy.xzkern
-arch/arm/boot/compressed/vmlinux
+# Kconfig presets
+all.config
 
-# ignore initramfs
-initramfs
-/*.sh
+# Kdevelop4
+*.kdev4
+
+# fetched Android config fragments
+kernel/configs/android-*.cfg
+
+out
+build.sh
+*.zip
+clang
+gcc-linaro-13.0.0-2022.10-x86_64_aarch64-linux-gnu.tar.xz
+gcc-linaro-13.0.0-2022.10-x86_64_aarch64-linux-gnu
+gcc-linaro-5.5.0-2017.10-x86_64_aarch64-linux-gnu.tar.xz
+gcc-linaro-5.5.0-2017.10-x86_64_aarch64-linux-gnu
