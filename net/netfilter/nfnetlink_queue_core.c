@@ -271,9 +271,6 @@ nfqnl_build_packet_message(struct nfqnl_instance *queue,
 		break;
 	}
 
-	if (queue->flags & NFQA_CFG_F_CONNTRACK)
-		ct = nfqnl_ct_get(entskb, &size, &ctinfo);
-
 	skb = alloc_skb(size, GFP_ATOMIC);
 	if (!skb)
 		goto nlmsg_failure;
@@ -385,7 +382,7 @@ nfqnl_build_packet_message(struct nfqnl_instance *queue,
 			BUG();
 	}
 
-	if (ct && nfqnl_ct_put(skb, ct, ctinfo) < 0)
+	if (ct < 0)
 		goto nla_put_failure;
 
 	if (cap_len > 0 && nla_put_be32(skb, NFQA_CAP_LEN, htonl(cap_len)))
@@ -761,8 +758,6 @@ nfqnl_recv_verdict(struct sock *ctnl, struct sk_buff *skb,
 		return -ENOENT;
 
 	rcu_read_lock();
-	if (nfqa[NFQA_CT] && (queue->flags & NFQA_CFG_F_CONNTRACK))
-		ct = nfqnl_ct_parse(entry->skb, nfqa[NFQA_CT], &ctinfo);
 
 	if (nfqa[NFQA_PAYLOAD]) {
 		u16 payload_len = nla_len(nfqa[NFQA_PAYLOAD]);
@@ -771,9 +766,6 @@ nfqnl_recv_verdict(struct sock *ctnl, struct sk_buff *skb,
 		if (nfqnl_mangle(nla_data(nfqa[NFQA_PAYLOAD]),
 				 payload_len, entry, diff) < 0)
 			verdict = NF_DROP;
-
-		if (ct)
-			nfqnl_ct_seq_adjust(skb, ct, ctinfo, diff);
 	}
 	rcu_read_unlock();
 
