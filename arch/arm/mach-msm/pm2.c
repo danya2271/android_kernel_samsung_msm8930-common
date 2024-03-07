@@ -1481,7 +1481,6 @@ static int msm_pm_enter(suspend_state_t state)
 
 	/* Must executed by CORE0 */
 	if (smp_processor_id()) {
-		__WARN();
 		goto suspend_exit;
 	}
 

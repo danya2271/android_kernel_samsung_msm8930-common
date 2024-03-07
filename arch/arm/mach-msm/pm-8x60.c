@@ -944,7 +944,6 @@ int msm_pm_idle_enter(enum msm_pm_sleep_mode sleep_mode)
 	}
 
 	default:
-		__WARN();
 		goto cpuidle_enter_bail;
 	}
 
@@ -1025,7 +1024,6 @@ static int msm_pm_enter(suspend_state_t state)
 		pr_info("%s\n", __func__);
 
 	if (smp_processor_id()) {
-		__WARN();
 		goto enter_exit;
 	}
 

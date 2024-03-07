@@ -53,8 +53,8 @@ static struct scalable scalable_pm8917[] __initdata = {
 		.sec_clk_sel = 2,
 		.l2cpmr_iaddr = 0x4501,
 		.vreg[VREG_CORE] = { "krait0", 1300000 },
-		.vreg[VREG_MEM]  = { "krait0_mem", 1150000 },
-		.vreg[VREG_DIG]  = { "krait0_dig", 1150000 },
+		.vreg[VREG_MEM]  = { "krait0_mem", 1280000 },
+		.vreg[VREG_DIG]  = { "krait0_dig", 1280000 },
 		.vreg[VREG_HFPLL_A] = { "krait0_s8", 2050000 },
 		.vreg[VREG_HFPLL_B] = { "krait0_l23", 1800000 },
 	},
@@ -65,8 +65,8 @@ static struct scalable scalable_pm8917[] __initdata = {
 		.sec_clk_sel = 2,
 		.l2cpmr_iaddr = 0x5501,
 		.vreg[VREG_CORE] = { "krait1", 1300000 },
-		.vreg[VREG_MEM]  = { "krait1_mem", 1150000 },
-		.vreg[VREG_DIG]  = { "krait1_dig", 1150000 },
+		.vreg[VREG_MEM]  = { "krait1_mem", 1280000 },
+		.vreg[VREG_DIG]  = { "krait1_dig", 1280000 },
 		.vreg[VREG_HFPLL_A] = { "krait1_s8", 2050000 },
 		.vreg[VREG_HFPLL_B] = { "krait1_l23", 1800000 },
 	},
@@ -89,8 +89,8 @@ static struct scalable scalable[] __initdata = {
 		.sec_clk_sel = 2,
 		.l2cpmr_iaddr = 0x4501,
 		.vreg[VREG_CORE] = { "krait0", 1300000 },
-		.vreg[VREG_MEM]  = { "krait0_mem", 1150000 },
-		.vreg[VREG_DIG]  = { "krait0_dig", 1150000 },
+		.vreg[VREG_MEM]  = { "krait0_mem", 1280000 },
+		.vreg[VREG_DIG]  = { "krait0_dig", 1280000 },
 		.vreg[VREG_HFPLL_A] = { "krait0_hfpll", 1800000 },
 	},
 	[CPU1] = {
@@ -100,8 +100,8 @@ static struct scalable scalable[] __initdata = {
 		.sec_clk_sel = 2,
 		.l2cpmr_iaddr = 0x5501,
 		.vreg[VREG_CORE] = { "krait1", 1300000 },
-		.vreg[VREG_MEM]  = { "krait1_mem", 1150000 },
-		.vreg[VREG_DIG]  = { "krait1_dig", 1150000 },
+		.vreg[VREG_MEM]  = { "krait1_mem", 1280000 },
+		.vreg[VREG_DIG]  = { "krait1_dig", 1280000 },
 		.vreg[VREG_HFPLL_A] = { "krait1_hfpll", 1800000 },
 	},
 	[L2] = {
@@ -115,14 +115,14 @@ static struct scalable scalable[] __initdata = {
 };
 
 static struct msm_bus_paths bw_level_tbl[] __initdata = {
-	[0] =  BW_MBPS(640), /* At least  80 MHz on bus. */
+	[0] =  BW_MBPS(800), /* At least 100 MHz on bus. */
 	[1] = BW_MBPS(1064), /* At least 133 MHz on bus. */
 	[2] = BW_MBPS(1600), /* At least 200 MHz on bus. */
 	[3] = BW_MBPS(2128), /* At least 266 MHz on bus. */
 	[4] = BW_MBPS(3200), /* At least 400 MHz on bus. */
 	[5] = BW_MBPS(3600), /* At least 450 MHz on bus. */
 	[6] = BW_MBPS(3936), /* At least 492 MHz on bus. */
-	[7] = BW_MBPS(4264), /* At least 533 MHz on bus. */
+	[7] = BW_MBPS(5600), /* At least 700 MHz on bus. */
 };
 
 static struct msm_bus_scale_pdata bus_scale_data __initdata = {
@@ -133,22 +133,22 @@ static struct msm_bus_scale_pdata bus_scale_data __initdata = {
 };
 
 static struct l2_level l2_freq_tbl[] __initdata = {
-	[0]  = { {  384000, PLL_8, 0, 0x00 },  LVL_LOW, 1050000, 1 },
-	[1]  = { {  432000, HFPLL, 2, 0x20 },  LVL_NOM, 1050000, 2 },
-	[2]  = { {  486000, HFPLL, 2, 0x24 },  LVL_NOM, 1050000, 2 },
-	[3]  = { {  540000, HFPLL, 2, 0x28 },  LVL_NOM, 1050000, 2 },
-	[4]  = { {  594000, HFPLL, 1, 0x16 },  LVL_NOM, 1050000, 2 },
-	[5]  = { {  648000, HFPLL, 1, 0x18 },  LVL_NOM, 1050000, 4 },
-	[6]  = { {  702000, HFPLL, 1, 0x1A },  LVL_NOM, 1050000, 4 },
-	[7]  = { {  756000, HFPLL, 1, 0x1C }, LVL_HIGH, 1150000, 4 },
-	[8]  = { {  810000, HFPLL, 1, 0x1E }, LVL_HIGH, 1150000, 4 },
-	[9]  = { {  864000, HFPLL, 1, 0x20 }, LVL_HIGH, 1150000, 4 },
-	[10] = { {  918000, HFPLL, 1, 0x22 }, LVL_HIGH, 1150000, 7 },
-	[11] = { {  972000, HFPLL, 1, 0x24 }, LVL_HIGH, 1150000, 7 },
-	[12] = { { 1026000, HFPLL, 1, 0x26 }, LVL_HIGH, 1150000, 7 },
-	[13] = { { 1080000, HFPLL, 1, 0x28 }, LVL_HIGH, 1150000, 7 },
+	[0]  = { {  384000, PLL_8, 0, 0x00 },  LVL_LOW, 950000, 1 },
+	[1]  = { {  432000, HFPLL, 2, 0x20 },  LVL_NOM, 950000, 2 },
+	[2]  = { {  486000, HFPLL, 2, 0x24 },  LVL_NOM, 950000, 2 },
+	[3]  = { {  540000, HFPLL, 2, 0x28 },  LVL_NOM, 950000, 2 },
+	[4]  = { {  594000, HFPLL, 1, 0x16 },  LVL_NOM, 980000, 2 },
+	[5]  = { {  648000, HFPLL, 1, 0x18 },  LVL_NOM, 1030000, 4 },
+	[6]  = { {  702000, HFPLL, 1, 0x1A },  LVL_NOM, 1030000, 4 },
+	[7]  = { {  756000, HFPLL, 1, 0x1C }, LVL_HIGH, 1080000, 4 },
+	[8]  = { {  810000, HFPLL, 1, 0x1E }, LVL_HIGH, 1090000, 4 },
+	[9]  = { {  864000, HFPLL, 1, 0x20 }, LVL_HIGH, 1100000, 4 },
+	[10] = { {  918000, HFPLL, 1, 0x22 }, LVL_HIGH, 1110000, 7 },
+	[11] = { {  972000, HFPLL, 1, 0x24 }, LVL_HIGH, 1120000, 7 },
+	[12] = { { 1026000, HFPLL, 1, 0x26 }, LVL_HIGH, 1130000, 7 },
+	[13] = { { 1080000, HFPLL, 1, 0x28 }, LVL_HIGH, 1140000, 7 },
 	[14] = { { 1134000, HFPLL, 1, 0x2A }, LVL_HIGH, 1150000, 7 },
-	[15] = { { 1188000, HFPLL, 1, 0x2C }, LVL_HIGH, 1150000, 7 },
+	[15] = { { 2128000, HFPLL, 1, 0x2E }, LVL_HIGH, 1280000, 7 }, //533mhz fsb
 	{ }
 };
 

@@ -3353,7 +3353,7 @@ static struct msm_thermal_data_actions msm_thermal_pdata_actions[] = {
 	{
 		.threshold = 70,
 		.threshold_clr = 67,
-		.max_freq = 1728000,
+		.max_freq = 2128000,
 	},
 	{
 		.threshold = 75,

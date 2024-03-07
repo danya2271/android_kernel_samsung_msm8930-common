@@ -211,8 +211,6 @@ int __cpuinit boot_secondary(unsigned int cpu, struct task_struct *idle)
 
 	if (cpu > 0 && cpu < ARRAY_SIZE(cold_boot_flags))
 		flag = cold_boot_flags[cpu];
-	else
-		__WARN();
 
 	if (per_cpu(cold_boot_done, cpu) == false) {
 		ret = scm_set_boot_addr(virt_to_phys(msm_secondary_startup),
